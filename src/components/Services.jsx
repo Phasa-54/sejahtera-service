@@ -1,0 +1,133 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Smartphone, Laptop, Tablet, Monitor, Cpu, HardDrive } from 'lucide-react';
+import { useToast } from '../ui/use-toast';
+
+const Services = () => {
+  const { toast } = useToast();
+
+  const services = [
+    {
+      icon: Smartphone,
+      title: 'Service Smartphone',
+      description: 'Perbaikan layar, baterai, kamera, dan kerusakan software untuk semua merk smartphone.',
+      features: ['Ganti Layar LCD', 'Ganti Baterai', 'Perbaikan Kamera', 'Update Software'],
+      color: 'from-red-500 to-red-600'
+    },
+    {
+      icon: Laptop,
+      title: 'Service Laptop',
+      description: 'Cleaning, upgrade hardware, perbaikan motherboard, dan instalasi sistem operasi.',
+      features: ['Cleaning Laptop', 'Upgrade RAM/SSD', 'Perbaikan Motherboard', 'Install OS'],
+      color: 'from-red-600 to-red-700'
+    },
+    {
+      icon: Tablet,
+      title: 'Service Tablet',
+      description: 'Perbaikan touchscreen, baterai, dan permasalahan software untuk tablet berbagai merk.',
+      features: ['Ganti Touchscreen', 'Ganti Baterai', 'Reset Software', 'Perbaikan Port'],
+      color: 'from-red-700 to-red-800'
+    },
+    {
+      icon: Monitor,
+      title: 'Service Monitor',
+      description: 'Perbaikan layar monitor LCD/LED, power supply, dan masalah tampilan lainnya.',
+      features: ['Perbaikan LCD', 'Ganti Power Supply', 'Kalibrasi Warna', 'Perbaikan Port'],
+      color: 'from-red-500 to-red-600'
+    },
+    {
+      icon: Cpu,
+      title: 'Service Komputer',
+      description: 'Rakit PC, upgrade komponen, perbaikan hardware, dan optimasi performa sistem.',
+      features: ['Rakit PC Custom', 'Upgrade Komponen', 'Perbaikan Hardware', 'Optimasi Sistem'],
+      color: 'from-red-600 to-red-700'
+    },
+    {
+      icon: HardDrive,
+      title: 'Recovery Data',
+      description: 'Pemulihan data dari storage yang rusak, terhapus, atau terformat.',
+      features: ['Recovery HDD/SSD', 'Recovery Flash Drive', 'Recovery Memory Card', 'Backup Data'],
+      color: 'from-red-700 to-red-800'
+    }
+  ];
+
+  const handleServiceClick = (serviceName) => {
+    toast({
+      title: '🚧 Fitur Booking Belum Tersedia',
+      description: `Untuk booking layanan ${serviceName}, silakan hubungi kami melalui WhatsApp atau form kontak!`,
+    });
+  };
+
+  return (
+    <section id="services" className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            Layanan Kami
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            Service Electronic
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Kami menyediakan berbagai layanan perbaikan dan maintenance untuk semua jenis perangkat elektronik Anda
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -10 }}
+              onClick={() => handleServiceClick(service.title)}
+              className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 cursor-pointer"
+            >
+              <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                <service.icon className="w-8 h-8 text-white" />
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
+                {service.title}
+              </h3>
+
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                {service.description}
+              </p>
+
+              <ul className="space-y-2">
+                {service.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-sm text-gray-700">
+                    <div className="w-1.5 h-1.5 bg-red-600 rounded-full" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 pt-6 border-t border-gray-100">
+                <button className="text-red-600 font-semibold group-hover:gap-2 flex items-center gap-1 transition-all">
+                  <span>Booking Layanan</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                  >
+                    →
+                  </motion.span>
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Services;
