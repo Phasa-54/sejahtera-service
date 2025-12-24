@@ -1,5 +1,6 @@
 {
 	"name": "web-app",
+	"homepage": "https://phasa-54.github.io/sejahtera-service/",
 	"type": "module",
 	"version": "0.0.0",
 	"private": true,
